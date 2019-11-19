@@ -32,6 +32,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.oBJ_ID.errors }" />
                 <div *ngIf="submitted && f.oBJ_ID.errors" class="alert alert-danger">
                   <div *ngIf="f.oBJ_ID.errors.required">**Mandatory Fields**</div>
+                  <div *ngIf="f.oBJ_ID.errors.minlength">oBJ_ID must be at least 6 characters</div>
                 </div>
               </div>
 
@@ -46,6 +47,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.oBJ_FIELD_ID.errors }" />
                 <div *ngIf="submitted && f.oBJ_FIELD_ID.errors" class="alert alert-danger">
                   <div *ngIf="f.oBJ_FIELD_ID.errors.required">**Mandatory Fields**</div>
+                  <div *ngIf="f.oBJ_FIELD_ID.errors.minlength">oBJ_FIELD_ID must be at least 6 characters </div>
                 </div>
               </div>
             </div>
@@ -61,7 +63,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.sUBGROUP_ID.errors }" />
                 <div *ngIf="submitted && f.sUBGROUP_ID.errors" class="alert alert-danger">
                   <div *ngIf="f.sUBGROUP_ID.errors.required">**Mandatory Fields**</div>
-                  <div *ngIf="f.sUBGROUP_ID.errors.sUBGROUP_ID">SUBGROUP_ID must be valid </div>
+                  <div *ngIf="f.sUBGROUP_ID.errors.minlength">SUBGROUP_ID must be at least 6 characters</div>
                 </div>
               </div>
             </div>
@@ -94,7 +96,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.dISPLAY_NAME.errors }" />
                 <div *ngIf="submitted && f.dISPLAY_NAME.errors" class="alert alert-danger">
                   <div *ngIf="f.dISPLAY_NAME.errors.required">**Mandatory Fields**</div>
-                  <div *ngIf="f.dISPLAY_NAME.errors.minlength">dISPLAY_NAME must be at least 6 characters</div>
+                  <div *ngIf="f.dISPLAY_NAME.errors.minlength">DISPLAY_NAME must be at least 6 characters</div>
                 </div>
               </div>
             </div>
@@ -137,6 +139,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.rEQFORM.errors }" />
                 <div *ngIf="submitted && f.rEQFORM.errors" class="alert alert-danger">
                   <div *ngIf="f.rEQFORM.errors.required">**Mandatory Fields**</div>
+                  <div *ngIf="f.rEQFORM.errors.minlength">Must be at least 6 characters</div>
                 </div>
               </div>
             </div>
@@ -145,7 +148,7 @@
 
           <!--Button Section-->
           <div class="form-group form-row mb-4">
-            <div class=" col"><button class="btn btn-primary font-italic">GenerateScript</button></div>
+            <div class=" col"><button class="btn btn-primary font-italic" (click)="toggle()">GenerateScript</button></div>
             <!-- <div class=" col"><button type="button" class="btn btn-primary font-italic" (click)="resetForm()"
                 [disabled]="!registerForm.valid">ResetForm</button>
             </div> -->
@@ -159,7 +162,7 @@
       <!--Second Column starts here-->
       <div class="col-sm-3 col-md-6 col-lg-4">
         <form class="p-2">
-          <div class="form-group purple-border">
+          <div  class="form-group purple-border">
             <p class="p-3"></p>
             <!--Text Area in progress-->
             <textarea class="form-control p-3 " id="exampleFormControlTextarea4" rows="12" #query>INSERT INTO
@@ -423,7 +426,7 @@
                     VALIDATION_TOOL_TIP)
                     VALUES
                     ('{{OBJ_ID}}','{{OBJ_FIELD_ID}}',
-                    '{{SUBGROUP_ID}}','{{vALUE_LIST}}'
+                    '{{SUBGROUP_ID}}','{{VALUE_LIST}}'
                     )</textarea>
                 <button class="btn btn-primary font-italic " (click)="copyToClipboard(query)">Copy
                   Query</button>
@@ -439,7 +442,160 @@
 
     <div *ngIf="OBJ_FIELD_TYPE_ID === 'LOOKUP_LIST'">
 
-      
+        <div class="row">
+            <div class="col-sm-9 col-md-6 col-lg-8">
+    
+              <!-- form starts here -->
+              <form class="text-center p-3 " [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <h5 style="background-color:dodgerblue;" class="font-weight-dark text-white">
+                  <p class="p-3 font-italic">OBJ_FIELD_LOOKUP_VALIDATON Table</p>
+                </h5>
+    
+    
+                <div class="form-row mb-4">
+                  <div class="col">
+                    <!-- OBJ_ID -->
+                    <div class="form-group">
+                      <input mdbInput type="text" [(ngModel)]="OBJ_ID" formControlName="oBJ_ID"
+                        class="form-control form-control-sm" placeholder="OBJ_ID" readonly
+                        [ngClass]="{ 'is-invalid': submitted && f.oBJ_ID.errors }" />
+                      <div *ngIf="submitted && f.oBJ_ID.errors" class="alert alert-danger">
+                        <div *ngIf="f.oBJ_ID.errors.required">**Mandatory Fields**</div>
+                      </div>
+                    </div>
+    
+    
+                  </div>
+                  <div class="col">
+                    <!-- OBJ_FIELD_ID -->
+                    <div class="form-group">
+                      <input type="text" [(ngModel)]="OBJ_FIELD_ID" formControlName="oBJ_FIELD_ID"
+                        class="form-control form-control-sm" placeholder="OBJ_FIELD_ID" readonly
+                        [ngClass]="{ 'is-invalid': submitted && f.oBJ_FIELD_ID.errors }" />
+                      <div *ngIf="submitted && f.oBJ_FIELD_ID.errors" class="alert alert-danger">
+                        <div *ngIf="f.oBJ_FIELD_ID.errors.required">**Mandatory Fields**</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="form-row mb-4">
+                  <div class="col">
+                    <!-- SUBGROUP_ID -->
+                    <div class="form-group">
+                      <input type="text" [(ngModel)]="SUBGROUP_ID" formControlName="sUBGROUP_ID"
+                        class="form-control form-control-sm" placeholder="SUBGROUP_ID" readonly
+                        [ngClass]="{ 'is-invalid': submitted && f.sUBGROUP_ID.errors }" />
+                      <div *ngIf="submitted && f.sUBGROUP_ID.errors" class="alert alert-danger">
+                        <div *ngIf="f.sUBGROUP_ID.errors.required">**Mandatory Fields**</div>
+                        <div *ngIf="f.sUBGROUP_ID.errors.sUBGROUP_ID">SUBGROUP_ID must be valid </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+    
+    
+                    <!-- LOOKUP_TABLE_NAME -->
+                    <div class="form-group">
+                      <input mdbInput type="text" [(ngModel)]="LOOKUP_TABLE_NAME"
+                        formControlName="lOOKUP_TABLE_NAME" class="form-control form-control-sm"
+                        placeholder="LOOKUP_TABLE_NAME"
+                        [ngClass]="{ 'is-invalid': submitted && f.lOOKUP_TABLE_NAME.errors }" />
+                      <div *ngIf="submitted && f.lOOKUP_TABLE_NAME.errors" class="alert alert-danger">
+                        <div *ngIf="f.lOOKUP_TABLE_NAME.errors.required">**Mandatory Fields**</div>
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+                <div class="form-row mb-4">
+                  <div class="col">
+                    <!--LOOKUP_TABLE_KEY -->
+                    <div class="form-group">
+                      <input type="text" [(ngModel)]="LOOKUP_TABLE_KEY" formControlName="lOOKUP_TABLE_KEY"
+                        class="form-control form-control-sm" placeholder="LOOKUP_TABLE_KEY"
+                        [ngClass]="{ 'is-invalid': submitted && f.vALIDATION_HELP_TEXT.errors }" />
+                      <div *ngIf="submitted && f.lOOKUP_TABLE_KEY.errors" class="alert alert-danger">
+                        <div *ngIf="f.lOOKUP_TABLE_KEY.errors.required">**Mandatory Fields**</div>
+                        <div *ngIf="f.lOOKUP_TABLE_KEY.errors.minlength">LOOKUP_TABLE_KEY must be at least 6
+                          characters</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <!-- LOOKUP_TABLE_DESCRIPTION -->
+                    <div class="form-group">
+                      <input type="text" [(ngModel)]="LOOKUP_TABLE_DESCRIPTION" formControlName="lOOKUP_TABLE_DESCRIPTION"
+                        class="form-control form-control-sm" placeholder="LOOKUP_TABLE_DESCRIPTION"
+                        [ngClass]="{ 'is-invalid': submitted && f.lOOKUP_TABLE_DESCRIPTION.errors }" />
+                      <div *ngIf="submitted && f.lOOKUP_TABLE_DESCRIPTION.errors" class="alert alert-danger">
+                        <div *ngIf="f.lOOKUP_TABLE_DESCRIPTION.errors.required">**Mandatory Fields**</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="col">
+                      <!--LOOKUP_TABLE_FILTER -->
+                      <div class="form-group">
+                        <input type="text" [(ngModel)]="LOOKUP_TABLE_FILTER" formControlName="lOOKUP_TABLE_FILTER"
+                          class="form-control form-control-sm" placeholder="LOOKUP_TABLE_FILTER"
+                          [ngClass]="{ 'is-invalid': submitted && f.lOOKUP_TABLE_FILTER.errors }" />
+                        <div *ngIf="submitted && f.lOOKUP_TABLE_FILTER.errors" class="alert alert-danger">
+                          <div *ngIf="f.lOOKUP_TABLE_FILTER.errors.required">**Mandatory Fields**</div>
+                          <div *ngIf="f.lOOKUP_TABLE_FILTER.errors.minlength">lOOKUP_TABLE_FILTER must be at least 6
+                            characters</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- CASCADE -->
+                      <div class="form-group">
+                        <input type="text" [(ngModel)]="CASCADE" formControlName="cASCADE"
+                          class="form-control form-control-sm" placeholder="CASCADE"
+                          [ngClass]="{ 'is-invalid': submitted && f.cASCADE.errors }" />
+                        <div *ngIf="submitted && f.cASCADE.errors" class="alert alert-danger">
+                          <div *ngIf="f.cASCADE.errors.required">**Mandatory Fields**</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+    
+    
+                <!--Button Section-->
+                <div class="form-group form-row mb-4">
+                  <div class=" col"><button class="btn btn-primary font-italic" >GenerateScript</button></div>
+                  <div class=" col"><button type="button" class="btn btn-primary font-italic"
+                      (click)="resetForm()">ResetForm</button>
+                  </div>
+                </div>
+    
+              </form>
+              <!-- Form Ends here-->
+            </div>
+    
+            <!--Column starts here-->
+            <div class="col-sm-3 col-md-6 col-lg-4">
+              <form class="p-2">
+                <div  class="form-group purple-border">
+                  <p class="p-3"></p>
+                  <!--Text Area in progress-->
+                  <textarea class="form-control p-3 " id="exampleFormControlTextarea4" rows="12">INSERT INTO
+                    [dbo].[OBJ_FIELD_LOOKUP_VALIDATON ](OBJ_ID,
+                    OBJ_FIELD_ID,
+                    SUBGROUP_ID,
+                    LOOKUP_TABLE_NAME,
+                    LOOKUP_TABLE_KEY,
+                    LOOKUP_TABLE_DESCRIPTION,LOOKUP_TABLE_FILTER,CASCADE)
+                    VALUES
+                    ('{{OBJ_ID}}','{{OBJ_FIELD_ID}}',
+                    '{{SUBGROUP_ID}}','{{LOOKUP_TABLE_NAME}}','{{LOOKUP_TABLE_KEY}}','{{LOOKUP_TABLE_DESCRIPTION}}'
+                    ,'{{LOOKUP_TABLE_FILTER}}','{{CASCADE}}')</textarea>
+                </div>
+              </form>
+            </div>
+          </div>
 
     </div>
 
