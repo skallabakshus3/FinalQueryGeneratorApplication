@@ -12,7 +12,7 @@ export class MainpageComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
-  Table: any = ['INPUT_VALIDATE_EXPRESSION', 'LOOKUP', 'LOOKUP_LIST']
+  Table: any = ['INPUT_VALIDATE_EXPRESSION', 'LOOKUP', 'LOOKUP_LIST','CALCULATE','CHECKBOX','INPUT','INPUTMULTILINE','VERSIONNUMBER']
   query: any;
   registerForm2: FormGroup;
   registerForm1: FormGroup;
@@ -26,11 +26,22 @@ export class MainpageComponent implements OnInit {
       rEQFORM: ['', [Validators.required, Validators.minLength(6)]],
       oBJ_ID: ['', [Validators.required, Validators.minLength(6)]],
       oBJ_FIELD_ID: ['', [Validators.required, Validators.minLength(6)]],
-      sUBGROUP_ID: ['', [Validators.required, Validators.minLength(6)]],
+      sUBGROUP_ID: ['', Validators.required],
       oBJ_FIELD_TYPE_ID: ['', Validators.required],
       rEQUIREDTEXT: ['', Validators.required],
       dISPLAY_NAME: ['', [Validators.required, Validators.minLength(6)]],
       iSKEYMEMBER: ['', Validators.required],
+
+      oRDINAL_POSITION: ['', Validators.required],
+      dESCRIPTION: ['', Validators.required],
+      oBJ_FIELD_CLASSIFICATION_ID: ['', Validators.required],
+      oBJ_FIELD_HELPURL: ['', Validators.required],
+      pOST_EDIT: ['', Validators.required],
+      tRANSLATION_FIELD_ID: ['', Validators.required],
+
+
+      
+      
 
       vALIDATION_EXPRESSION: ['', Validators.required],
       vALIDATION_HELP_TEXT: ['', Validators.required],
@@ -59,7 +70,7 @@ export class MainpageComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    //alert('SUCCESS!! :-)\n\n' + JSON.stringify('Copy Your Script'))
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify('Copy Your Script'))
   }
 
   //resetting form
