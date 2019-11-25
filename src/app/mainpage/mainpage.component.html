@@ -1,9 +1,22 @@
-<!--Template calling-->
-<div *ngTemplateOutlet="mainpage">
-</div>
 
-<!--Template starts -->
-<ng-template #mainpage>
+
+<div class="jumbotron">
+  <h1>Select Your Operation</h1>
+  <!-- ObjectName -->
+  <div class="form-group col-md-5">
+    <select class="custom-select form-control-md" [(ngModel)]="OBJNAME">
+      <option value="Choose Your Table" disabled selected>Choose Your Operation</option>
+      <option *ngFor="let table of operations" [ngValue]="table">{{table}}</option>
+    </select>
+    
+  </div>
+  <div *ngIf="OBJNAME === 'Create'">
+    
+    <app-create-component></app-create-component>
+  </div>
+</div>
+<div *ngIf="OBJNAME === 'Update'">
+  <h1>Update working</h1>
   <div class="card">
 
     <!-- Header Starts here -->
@@ -23,7 +36,7 @@
         <form class="text-center " [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <p class="p-1"></p>
           <div class="form-row mb-4">
-            <div class="col">               
+            <div class="col">
               <label>OBJ_ID</label>
               <!-- OBJ_ID -->
               <div class="form-group col-md-10">
@@ -73,7 +86,7 @@
                   <option *ngFor="let table of Table" [ngValue]="table">{{table}}</option>
                 </select>
                 <div *ngIf="submitted && f.oBJ_FIELD_TYPE_ID.errors" class="alert alert-danger">
-                  <div *ngIf="f.oBJ_FIELD_TYPE_ID.errors.required">OBJ_FIELD_TYPE_ID Must be selected</div>
+                  <div *ngIf="f.oBJ_FIELD_TYPE_ID.errors.required">Must be selected</div>
                 </div>
               </div>
             </div>
@@ -188,8 +201,9 @@
               <!-- OBJ_FIELD_CLASSIFICATION_ID -->
               <div class="form-group col-md-11">
                 <label>OBJ_FIELD_CLASSIFICATION_ID</label>
-                <input mdbInput type="text" [(ngModel)]="OBJ_FIELD_CLASSIFICATION_ID" formControlName="oBJ_FIELD_CLASSIFICATION_ID"
-                  class="form-control form-control-sm" placeholder="OBJ_FIELD_CLASSIFICATION_ID"
+                <input mdbInput type="text" [(ngModel)]="OBJ_FIELD_CLASSIFICATION_ID"
+                  formControlName="oBJ_FIELD_CLASSIFICATION_ID" class="form-control form-control-sm"
+                  placeholder="OBJ_FIELD_CLASSIFICATION_ID"
                   [ngClass]="{ 'is-invalid': submitted && f.oBJ_FIELD_CLASSIFICATION_ID.errors }" />
                 <div *ngIf="submitted && f.oBJ_FIELD_CLASSIFICATION_ID.errors" class="alert alert-danger">
                   <div *ngIf="f.oBJ_FIELD_CLASSIFICATION_ID.errors.required">**Mandatory Fields**</div>
@@ -211,7 +225,7 @@
               </div>
             </div>
             <div class=" col">
-              <button class="btn btn-primary font-italic btn-block" (click)="toggle()">GenerateScript</button>
+              <button class="btn btn-primary font-italic btn-block">GenerateScript</button>
             </div>
           </div>
         </form>
@@ -221,11 +235,11 @@
 
       <!--Second Column starts here-->
       <div class="col-lg-3">
-        <form >
+        <form>
           <div class="form-group purple-border">
             <p class="p-2"></p>
             <!--Text Area in progress-->
-            <textarea class="form-control"  rows="15" #query>INSERT INTO
+            <textarea class="form-control" rows="15" #query>INSERT INTO
       [dbo].[OBJ_FIELD]([OBJ_ID]
       ,[OBJ_FIELD_ID]
       ,[SUBGROUP_ID]
@@ -255,9 +269,7 @@
 
     </div>
     <!--Grid row page content ends here-->
-
   </div>
-
 
   <!--Dropdown Div Starts-->
   <div class="image1">
@@ -272,10 +284,10 @@
 
           <!-- form starts here -->
           <form class="text-center  " [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-           
-            <h5  class="font-weight-dark text-white">
-                <p class="p-3 font-italic">OBJ_FIELD_EXPRESSION_VALIDATION TEMPLATE</p>
-              </h5>
+
+            <h5 class="font-weight-dark text-white">
+              <p class="p-3 font-italic">OBJ_FIELD_EXPRESSION_VALIDATION TEMPLATE</p>
+            </h5>
             <div class="form-row mb-4">
               <div class="col">
                 <label class="font-weight-dark text-white">OBJ_ID</label>
@@ -377,7 +389,7 @@
 
         <!--Second Column starts here-->
         <div class="col-sm-3 col-md-6 col-lg-4">
-          <form >
+          <form>
             <div class="form-group purple-border">
               <p class="p-3"></p>
               <!--Text Area in progress-->
@@ -412,10 +424,10 @@
 
           <!-- form starts here -->
           <form class="text-center " [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-              <h5  class="font-weight-dark text-white">
-                  <p class="p-3 font-italic">OBJ_FIELD_LOOKUP_LIST_VALIDATON  TEMPLATE</p>
-                </h5>
-            
+            <h5 class="font-weight-dark text-white">
+              <p class="p-3 font-italic">OBJ_FIELD_LOOKUP_LIST_VALIDATON TEMPLATE</p>
+            </h5>
+
             <div class="form-row mb-4">
               <div class="col">
                 <label class="font-weight-dark text-white">OBJ_ID</label>
@@ -520,8 +532,8 @@
 
           <!-- form starts here -->
           <form class="text-center" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <h5  class="font-weight-dark text-white">
-              <p class="p-3 font-italic">OBJ_FIELD_LOOKUP_VALIDATON  TEMPLATE</p>
+            <h5 class="font-weight-dark text-white">
+              <p class="p-3 font-italic">OBJ_FIELD_LOOKUP_VALIDATON TEMPLATE</p>
             </h5>
 
 
@@ -685,6 +697,4 @@
     </div>
   </div>
   <!--Dropdown Div Ends-->
-
-</ng-template>
-<!--Template Ends Here-->
+</div>

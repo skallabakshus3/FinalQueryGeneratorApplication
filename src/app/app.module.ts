@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { ChildpageComponent } from './childpage/childpage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateComponentComponent } from './create-component/create-component.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent ,SectionComponent, ChildpageComponent, MainpageComponent, ViewComponent, MainpageComponent,    
+    AppComponent ,SectionComponent, ChildpageComponent, MainpageComponent, ViewComponent, MainpageComponent, CreateComponentComponent,    
   ],
   imports: [
     BrowserModule,

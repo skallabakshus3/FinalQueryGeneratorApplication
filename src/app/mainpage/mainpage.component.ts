@@ -11,7 +11,8 @@ export class MainpageComponent implements OnInit {
   @Output() addComponentClick = new EventEmitter();
   registerForm: FormGroup;
   submitted = false;
-
+  
+  operations : any=['Create','Update']
   Table: any = ['INPUT_VALIDATE_EXPRESSION', 'LOOKUP', 'LOOKUP_LIST','CALCULATE','CHECKBOX','INPUT','INPUTMULTILINE','VERSIONNUMBER']
   query: any;
   registerForm2: FormGroup;
@@ -32,6 +33,8 @@ export class MainpageComponent implements OnInit {
       dISPLAY_NAME: ['', [Validators.required, Validators.minLength(6)]],
       iSKEYMEMBER: ['', Validators.required],
 
+
+      
       oRDINAL_POSITION: ['', Validators.required],
       dESCRIPTION: ['', Validators.required],
       oBJ_FIELD_CLASSIFICATION_ID: ['', Validators.required],

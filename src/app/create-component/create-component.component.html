@@ -1,0 +1,49 @@
+
+
+<form>
+  <div class="form-row">
+    <div class="col-md-4 mb-4">
+      <label>Give Name</label>
+      <!-- Object Name -->
+      <input type="text" id="objid" [(ngModel)]="OBJ_ID" formControlName="oBJ_ID" class="form-control form-control-sm"
+        placeholder="Object Name" [ngClass]="{ 'is-invalid': submitted && f.oBJ_ID.errors }" />
+      <div *ngIf="submitted && f.oBJ_ID.errors" class="alert alert-danger">
+        <div *ngIf="f.oBJ_ID.errors.required">**Mandatory Fields**</div>
+      </div>
+    </div>
+  </div>
+  
+   <!--Template starts -->
+   <ng-template #temp>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <input type="text" class="form-control " id="validationServer01" placeholder="Field Name" required>
+    </div>
+    <div class="col-md-3 mb-3">  
+        <select class="custom-select form-control-md" [(ngModel)]="OBJNAME">
+            <option value="Choose Your Table" disabled selected>Choose Data Type</option>
+            <option *ngFor="let types of Datatypes" [ngValue]="types">{{types}}</option>
+          </select>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="custom-control custom-checkbox mb-3">
+        <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+        <label class="custom-control-label" for="customControlValidation1">Not Null</label>
+      
+      </div>
+    </div>
+  </div>
+   </ng-template>
+  
+</form>
+<!--Template calling-->
+<div *ngTemplateOutlet="temp">
+  </div>
+  
+  <div *ngTemplateOutlet="temp">
+    </div>
+    <div *ngTemplateOutlet="temp">
+      </div>
+
+      <button class="btn btn-primary font-italic">Go & Create
+        </button>
