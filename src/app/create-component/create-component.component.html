@@ -1,5 +1,3 @@
-
-
 <form>
   <div class="form-row">
     <div class="col-md-4 mb-4">
@@ -12,38 +10,48 @@
       </div>
     </div>
   </div>
-  
-   <!--Template starts -->
-   <ng-template #temp>
-  <div class="form-row">
-    <div class="col-md-3 mb-3">
-      <input type="text" class="form-control " id="validationServer01" placeholder="Field Name" required>
-    </div>
-    <div class="col-md-3 mb-3">  
-        <select class="custom-select form-control-md" [(ngModel)]="OBJNAME">
-            <option value="Choose Your Table" disabled selected>Choose Data Type</option>
-            <option *ngFor="let types of Datatypes" [ngValue]="types">{{types}}</option>
-          </select>
-    </div>
-    <div class="col-md-3 mb-3">
-      <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
-        <label class="custom-control-label" for="customControlValidation1">Not Null</label>
-      
-      </div>
-    </div>
-  </div>
-   </ng-template>
-  
-</form>
-<!--Template calling-->
-<div *ngTemplateOutlet="temp">
-  </div>
-  
-  <div *ngTemplateOutlet="temp">
-    </div>
-    <div *ngTemplateOutlet="temp">
-      </div>
+  <form [formGroup]="dynamicField">
+    
+    <div formArrayName="itemRows">
+      <div *ngFor="let itemrow of dynamicField.controls.itemRows.controls; let i=index" [formGroupName]="i">
+        
+        
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-3">
+              <input type="text" class="form-control " id="validationServer01" placeholder="Field Name" required>
+            </div>
+            <div class="col-md-3 ">
 
-      <button class="btn btn-primary font-italic">Go & Create
-        </button>
+              <select class="custom-select form-control-md" [(ngModel)]="OBJNAME">
+                <option value="Choose Your Table" disabled selected>Choose Data Type</option>
+                <option *ngFor="let types of Datatypes" [ngValue]="types">{{types}}</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <div class="check custom-control custom-checkbox ">
+                <input type="checkbox" class="custom-control-input" id="customControlValidation1" >
+                <label class="custom-control-label" for="customControlValidation1">Null</label>
+
+              </div>
+            </div>
+            <div class="col-md-3 ">
+                <button type="button" (click)="addNewRow()" class="btn btn-primary">+</button>
+                <button  (click)="deleteRow(i)"class="btn btn-danger">-</button><br>
+                    
+            </div>
+            
+           
+          </div>
+        </div>
+        
+      </div>
+      <br>
+    </div>
+  </form>
+</form>
+<button class="btn btn-primary font-italic">Go & Create</button>
+
+
+
+

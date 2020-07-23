@@ -1,0 +1,10 @@
+#input{ position:absolute; top:2; left:2; z-index:999; padding:0; margin:0; }
+#select { position:absolute; top:0; left:0; padding:0; margin:0; }
+
+input.check{
+    width: 100; /*Desired width*/
+    height: 30px; /*Desired height*/
+   
+  }
+
+  
